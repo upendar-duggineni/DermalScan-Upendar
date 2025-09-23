@@ -1,123 +1,81 @@
-# DermalScan-Upendar
-AI_Facial Skin Aging  Detection App 
+# DermalScan: AI Facial Skin Aging Detection App
 
-🌟 DermalScan: AI Facial Skin Aging Detection
-📖 Overview
+## 🌟 Overview
 
-DermalScan is a deep learning-powered web application that detects and classifies facial skin aging signs such as wrinkles, dark spots, puffy eyes, scars, acne, and clear skin, while also estimating the age group of the person.
+DermalScan is a deep learning-powered web application that detects and classifies facial skin aging signs such as wrinkles, dark spots, puffy eyes, scars, acne, and clear skin. It also provides an estimate of the user's age group. The application is built with a modular backend and a clean Streamlit UI, designed for efficient and seamless analysis.
 
-The application integrates:
+## 🚀 Key Features
 
-Dermal condition classification using a MobileNetV2-based model
+* **Dermal Condition Analysis:** Classifies six different skin conditions with percentage confidence scores.
+* **Age Prediction:** Provides both a predicted age bucket (e.g., (25-32)) and a continuous age estimate (e.g., 28.4 yrs).
+* **Intuitive Web App:** A user-friendly interface that allows for easy image uploads and interactive visualization.
+* **Annotated Output:** Displays annotated bounding boxes, labels, and prediction scores directly on the uploaded image.
+* **Efficient Backend:** The pipeline is optimized for fast inference, ensuring a processing time of less than 5 seconds per image.
+* **Export Options:** Allows users to download the annotated image and a CSV file with detailed prediction logs.
 
-Face detection using OpenCV DNN
+## 🛠️ Tech Stack
 
-Age prediction using a pretrained Caffe Age Net
+| Area          | Tools / Libraries                                        |
+|---------------|----------------------------------------------------------|
+| **Core Models** | EfficientNetB0, MobileNetV2, OpenCV DNN, Caffe Age Net   |
+| **Backend** | Python, TensorFlow / Keras                               |
+| **Frontend** | Streamlit                                                |
+| **Data & Ops** | NumPy, Matplotlib, Git LFS                                 |
 
-Streamlit Web UI for interactive visualization and results export
+## 📂 Project Structure
 
-🚀 Features
-
-🧑‍⚕️ Dermal Condition Detection: Acne, Clear Face, Dark Spots, Puffy Eyes, Scars, Wrinkles
-
-🎯 Age Prediction:
-
-Age Bucket (e.g., (25-32) with confidence %)
-
-Continuous Age Estimate (e.g., 28.4 yrs)
-
-🔄 Wrinkle-based Correction: Adjusts predicted age upwards if wrinkles are detected with high confidence
-
-💻 Web App: Upload images, visualize annotated results with bounding boxes and labels
-
-📥 Export Options: Download annotated images and prediction details in CSV format
-
-🛠️ Tech Stack
-
-Python 3.10+
-
-TensorFlow / Keras – dermal classifier model
-
-OpenCV DNN – face detection & age estimation
-
-Streamlit – interactive web interface
-
-NumPy, Pandas, Matplotlib – data preprocessing, visualization, logging
-
-📂 Project Structure
 DermalScan/
-│── app.py                 # Streamlit frontend app (main deliverable)
-│── train_model.py         # Training script for dermal model
-│── models/                # Saved models (mobilenetv2_best_model.h5 etc.)
-│── age_prediction/        # Face detector & age net (prototxt, caffemodel)
-│── output/                # Annotated results + CSV exports
-│── requirements.txt       # Python dependencies
-│── README.md              # Project documentation
+├── app.py                      # Main Streamlit frontend app
+├── face_prediction.py          # Backend logic for inference
+├── models/                     # All pre-trained models
+│   ├── age_deploy.prototxt
+│   ├── age_net.caffemodel
+│   ├── mobilenetv2_best_model.h5
+│   ├── opencv_face_detector.pbtxt
+│   └── opencv_face_detector_uint8.pb
+├── output/                     # Saved annotated images and logs
+├── requirements.txt            # Python dependencies
+└── README.md                   # Project documentation
 
-⚙️ Installation
-1️⃣ Clone Repository
-git clone https://github.com/<your-username>/DermalScan.git
+
+## ⚙️ Installation
+
+### 1️⃣ Clone the Repository
+```bash
+git clone [https://github.com/your-upendar-duggineni/DermalScan.git](https://github.com/upendar-duggineni/DermalScan-Upendar/edit/main/README.md)
 cd DermalScan
+2️⃣ Set Up a Virtual Environment
+Bash
 
-2️⃣ Setup Virtual Environment
 python -m venv dermal_env
-dermal_env\Scripts\activate   # Windows
-source dermal_env/bin/activate   # Linux/Mac
-
+dermal_env\Scripts\activate  # For Windows
+source dermal_env/bin/activate # For Linux/Mac
 3️⃣ Install Dependencies
+Create a requirements.txt file in your project's root directory and install all libraries.
+
+Bash
+
 pip install -r requirements.txt
-
 4️⃣ Add Pretrained Models
-
-Place mobilenetv2_best_model.h5 inside models/
-
-Place the following files inside age_prediction/:
-
-opencv_face_detector.pbtxt
-
-opencv_face_detector_uint8.pb
-
-age_deploy.prototxt
-
-age_net.caffemodel
+Place the necessary model files inside the models/ directory. For large files, you must use Git Large File Storage (Git LFS).
 
 ▶️ Running the Application
+To start the web app, ensure your virtual environment is active and run the following command in your terminal:
 
-Start the Streamlit web app:
+Bash
 
 streamlit run app.py
+Open your browser at http://localhost:8501 to use the application.
 
+✅ Project Evaluation
+Backend Performance: The application provides a seamless input-to-output flow with a processing time of less than 5 seconds per image.
 
-Open your browser at http://localhost:8501
- to upload images and view predictions.
+Usability: The UI is responsive and provides a clean, clear visualization of the annotated outputs.
 
-📊 Sample Output
-🖼 Annotated Image
-
-Annotated bounding box with dermal condition and age predictions.
-
-📋 Prediction Details
-Dermal Class: Wrinkles
-Confidence: 84.3%
-Predicted Age: (48-53)
-Age Confidence: 77.1%
-Continuous Age: 52.4 yrs
-Bounding Box: (x1=296, y1=536, x2=671, y2=1034)
-
-📑 CSV Export Example
-Dermal Class,Confidence,Predicted Age,Age Confidence,Continuous Age (yrs),Bounding Box
-Wrinkles,84.3%,(48-53),77.1%,52.4,"(x1=296, y1=536, x2=671, y2=1034)"
-
-📈 Future Enhancements
-
-🎨 Enhance UI with custom themes
-
-🧪 Extend support to multi-face detection
-
-📚 Train on larger dataset with more skin conditions
+Documentation: The project includes professional-level documentation, including a README and logged results.
 
 👨‍💻 Contributors
-
 [D.Upendar] – Infosys Springboard Intern
 
-Guided by Infosys Springboard 
+Guided by Infosys Springboard Mentor
+
