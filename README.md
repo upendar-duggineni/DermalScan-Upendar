@@ -1,7 +1,5 @@
 # DermalScan: AI Facial Skin Aging Detection App
 
-# 🌿 DermalScan: AI Facial Skin Aging Detection  
-
 > A deep learning–based web app for detecting **facial skin conditions** and **estimating age** from images.  
 > This project was developed as part of the **AI Facial Skin Aging Detection** initiative under **Infosys Springboard 6.0**.
 
